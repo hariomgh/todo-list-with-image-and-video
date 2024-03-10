@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
     db.updateDataBase();
   }
 
-  void saveImage(String imagePath) {
+  void saveImage(String imagePath, int index) {
     setState(() {
       db.sampleList.add([imagePath]);
     });
@@ -89,18 +89,30 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          searchBox(),
+          Stack(
+            children: [
+              Container(
+                height: 80,
+                color: Color(0xff3368C6),
+              ),
+              searchBox()
+            ],
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: _foundList.length,
               itemBuilder: (context, index) {
+                String sampleName = _foundList[index][0];
+                String? sampleImage = _foundList[index].length > 1 ? _foundList[index][1] : null; // Check if image data exists
                 return EachTile(
-                    sampleName: _foundList[index] [0],
+                  sampleName: sampleName,
+                  sampleImage: sampleImage, // Pass image data
                   deleteFunction: (context) => deleteTask(index),
-                  saveImageFunction: saveImage,
+                  saveImageFunction: (imagePath) => saveImage(imagePath, index),
                 );
               },
             ),
+
           ),
         ],
       ),
@@ -114,20 +126,22 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15,),
         decoration: BoxDecoration(
-          color: Color(0xff3368C6),
+          // color: Color(0xff3368C6),
+          color: Colors.white,
           border: Border.all(
             color: Color(0xff3368C6),
           ),
           borderRadius: BorderRadius.circular(12),
         ),
         child: TextField(
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
           onChanged: _runFilter,
           decoration: InputDecoration(
+            focusColor: Colors.black,
               contentPadding: EdgeInsets.all(0),
               prefixIcon: Icon(
                 Icons.search,
-                color: Colors.white,
+                color: Color(0xff3368C6),
                 size: 20,
               ),
               prefixIconConstraints: BoxConstraints(
@@ -137,7 +151,7 @@ class _HomePageState extends State<HomePage> {
               border: InputBorder.none,
               hintText: ' Search',
               hintStyle: TextStyle(
-                color: Colors.white,
+                color: Color(0xff3368C6),
               ),
 
           ),

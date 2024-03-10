@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-           Image.asset("assets/images/app_icon.jpeg"),
+           Image.asset("assets/images/splash_image.png"),
             Text('Quasmo',
               style: TextStyle(
                 color: Colors.white,

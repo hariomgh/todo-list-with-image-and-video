@@ -40,6 +40,9 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_camera: ^1.0.0
+  io: ^1.0.4
+  video_player: ^2.8.2
+  path_provider: ^2.1.2
 
 dev_dependencies:
   flutter_test:
